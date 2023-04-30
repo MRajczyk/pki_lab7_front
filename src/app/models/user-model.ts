@@ -4,7 +4,9 @@ export interface User {
   password: string,
   email: string,
   roles: [string],
-  registerDate: string,
+  joined: string,
+  lastVisit: string,
+  counter: Number,
   accepted: boolean,
   acceptDeadline: string,
 }

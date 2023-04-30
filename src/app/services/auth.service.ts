@@ -12,6 +12,9 @@ export class AuthService {
   public redirectTo: string = '/';
   private endpoint: string = '/auth';
 
+  public loginCounter: Number = 0;
+  public lastVisit: string = "";
+
   private hasLoginErrors = new BehaviorSubject<boolean>(false);
   public hasLoginErrors$ = this.hasLoginErrors.asObservable();
   private hasRegisterErrors = new BehaviorSubject<boolean>(false);
@@ -41,6 +44,8 @@ export class AuthService {
         sessionStorage.setItem('token', returnVal.accessToken);
         sessionStorage.setItem('refresh-token', returnVal.refreshToken);
         sessionStorage.setItem('roles', JSON.stringify(returnVal.roles));
+        this.loginCounter = returnVal.counter;
+        this.lastVisit = returnVal.lastVisit
 
         if(!environment.production) {
           console.log('token: ', returnVal.accessToken);
@@ -87,6 +92,8 @@ export class AuthService {
   }
 
   logOut(): void {
+    this.loginCounter = 0;
+    this.lastVisit = "";
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('refresh-token');
     sessionStorage.removeItem('roles');

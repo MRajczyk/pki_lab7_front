@@ -7,24 +7,26 @@
   <span class="example-spacer"></span>
   <div class="rightsideButtons">
     <button class="buttonsRight" *ngIf="authService.isAuthenticated()">
-      <mat-icon (click)="onLoggedInfoClick()">Login info</mat-icon>
+      <span (click)="onLoggedInfoClick()">Login info</span>
     </button>
     <button class="buttonsRight" *ngIf="!authService.isAuthenticated()">
-      <mat-icon (click)="onRegisterClick()">Register</mat-icon>
+      <span (click)="onRegisterClick()">Register</span>
     </button>
     <button class="buttonsRight" *ngIf="!authService.isAuthenticated()">
-      <mat-icon (click)="onLoginClick()">Login</mat-icon>
+      <span (click)="onLoginClick()">Login</span>
     </button>
     <!-- TODO: show only when has admin role -->
     <button class="buttonsRight" *ngIf="authService.isAuthenticated()">
-      <mat-icon (click)="onAdminClick()">Admin</mat-icon>
+      <span (click)="onAdminClick()">Admin</span>
     </button>
     <!-- TODO: show only when has user or admin role -->
     <button class="buttonsRight" *ngIf="authService.isAuthenticated()">
-      <mat-icon (click)="onLoggedInClick()">LoggedIn</mat-icon>
+      <span (click)="onLoggedInClick()">LoggedIn</span>
     </button>
     <button class="buttonsRight" *ngIf="authService.isAuthenticated()">
-      <mat-icon (click)="onLogoutClick()">Logout</mat-icon>
+      <span (click)="onLogoutClick()">Logout</span>
     </button>
+    <span style="margin-left: 10px; font-size: 15px">Counter: {{authService.loginCounter}}</span>
+    <span *ngIf="authService.lastVisit !== ''" style="margin-left: 10px; font-size: 15px">Last visit: {{authService.lastVisit}}</span>
   </div>
 </mat-toolbar>
