@@ -9,5 +9,6 @@
 }
 
 .router-outlet-content {
+  text-align: center;
   flex-grow: 1
 }
