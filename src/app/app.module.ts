@@ -21,6 +21,8 @@ import {TokenInterceptorService} from "./services/token-interceptor.service";
 import {UserService} from "./services/users.service";
 import {DataService} from "./services/data.service";
 import { ShowLoginDataComponent } from './components/show-login-data-component/show-login-data.component';
+import { NgMaterialModule } from './ng-material/ng-material.module';
+import {DbHealthService} from "./services/db-health.service";
 
 @NgModule({
   declarations: [
@@ -40,9 +42,10 @@ import { ShowLoginDataComponent } from './components/show-login-data-component/s
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgMaterialModule
   ],
-  providers: [AuthService, AuthGuardService, UserService, DataService,
+  providers: [AuthService, AuthGuardService, UserService, DataService, DbHealthService,
     {
       provide: JwtHelperService,
       useFactory: () => new JwtHelperService()
