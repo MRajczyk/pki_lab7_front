@@ -1,19 +1,39 @@
 <div *ngIf="authService.isAuthenticated()">
   <div *ngIf="authService.hasAdminPrivileges()">
     <p>Admin works!</p>
-    <ol *ngIf="data">
-      <li *ngFor="let publicData of data.data">
-        <span><b>status:</b>{{data.status}}</span>
-        <div class="list-item-name"><b>id:</b>{{publicData._id }}{{'\u00A0'}}{{'\u00A0'}}<b>message</b>:{{publicData.name}}{{'\u00A0'}}{{'\u00A0'}}<b>required role</b>:{{publicData.requiredRole === '' ? 'none' : publicData.requiredRole}}</div>
-      </li>
-    </ol>
-    <ol>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Message</th>
+        <th>Required role</th>
+      </tr>
+      <tr *ngFor="let publicData of data?.data">
+        <td>{{publicData._id }}</td>
+        <td>{{publicData.name}}</td>
+        <td>{{publicData.requiredRole}}</td>
+      </tr>
+    </table>
       <p>=======================================================================================</p>
-      <li *ngFor="let user of users">
-        <div class="list-item-name"><b>User: {{user.name}}</b> ({{user._id}})<br>email: {{ user.email }} <b>Accepted: </b>{{user.accepted}}<br>Accept deadline: {{user.acceptDeadline}}</div>
-        <button *ngIf="!user.accepted" (click)="onVerifyUser(user._id)">Accept!</button>
-      </li>
-    </ol>
+      <table>
+        <tr>
+          <th>Username</th>
+          <th>Id</th>
+          <th>Email</th>
+          <th>Accepted role</th>
+          <th>Accept deadline</th>
+          <th>Accept button</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user._id}}</td>
+          <td>{{ user.email }}</td>
+          <td>{{user.accepted}}</td>
+          <td>{{user.acceptDeadline}}</td>
+          <td>
+            <button *ngIf="!user.accepted" (click)="onVerifyUser(user._id)">Accept!</button>
+          </td>
+        </tr>
+      </table>
   </div>
   <div *ngIf="!authService.hasAdminPrivileges()">
     <p><b>Admin role is required to view this content!</b></p>

@@ -19,6 +19,8 @@ export class AuthService {
   public hasLoginErrors$ = this.hasLoginErrors.asObservable();
   private hasRegisterErrors = new BehaviorSubject<boolean>(false);
   public hasRegisterErrors$ = this.hasRegisterErrors.asObservable();
+  private userNotAccepted = new BehaviorSubject<boolean>(false);
+  public userNotAccepted$ = this.userNotAccepted.asObservable();
 
   constructor(public jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {}
 
@@ -55,8 +57,12 @@ export class AuthService {
         this.router.navigate([this.redirectTo]);
       },
       error: err => {
-        this.hasLoginErrors.next(true);
-        console.log(err.message);
+        if(err.status === 401) {
+          this.hasLoginErrors.next(true);
+        }
+        else if(err.status === 403) {
+          this.userNotAccepted.next(true);
+        }
       }
     });
   }
